@@ -1,0 +1,11 @@
+{
+  "Version": 1,
+  "Hash": "Yravmy9jgtOeaOYdkNPVwyuwSCf9tMR5E65frYtTQ9c=",
+  "Source": "InsuranceCardServer",
+  "BasePath": "_content/InsuranceCardServer",
+  "Mode": "Default",
+  "ManifestType": "Build",
+  "ReferencedProjectsConfiguration": [],
+  "DiscoveryPatterns": [],
+  "Assets": []
+}
