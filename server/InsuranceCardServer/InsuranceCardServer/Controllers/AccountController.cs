@@ -7,6 +7,6 @@ namespace InsuranceCardServer.Controllers
 {
     public class AccountController : ControllerBase
     {
-
+        
     }
 }
