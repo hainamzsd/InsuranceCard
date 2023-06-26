@@ -5,12 +5,8 @@ using Microsoft.EntityFrameworkCore;
 
 namespace InsuranceCardServer.Controllers
 {
-    public class CustomerController : ControllerBase
+    public class AccountController : ControllerBase
     {
-
-
-    
-
 
     }
 }
