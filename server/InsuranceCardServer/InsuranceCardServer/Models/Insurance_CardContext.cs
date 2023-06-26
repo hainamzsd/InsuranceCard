@@ -5,26 +5,25 @@ using Microsoft.EntityFrameworkCore.Metadata;
 
 namespace InsuranceCardServer.Models
 {
-    public partial class motorbike_insuranceContext : DbContext
+    public partial class Insurance_CardContext : DbContext
     {
-        public motorbike_insuranceContext()
+        public Insurance_CardContext()
         {
         }
 
-        public motorbike_insuranceContext(DbContextOptions<motorbike_insuranceContext> options)
+        public Insurance_CardContext(DbContextOptions<Insurance_CardContext> options)
             : base(options)
         {
         }
 
         public virtual DbSet<Accident> Accidents { get; set; } = null!;
+        public virtual DbSet<Account> Accounts { get; set; } = null!;
         public virtual DbSet<Compensation> Compensations { get; set; } = null!;
         public virtual DbSet<CompensationRequest> CompensationRequests { get; set; } = null!;
         public virtual DbSet<Contract> Contracts { get; set; } = null!;
-        public virtual DbSet<Customer> Customers { get; set; } = null!;
         public virtual DbSet<Payment> Payments { get; set; } = null!;
         public virtual DbSet<Punishment> Punishments { get; set; } = null!;
         public virtual DbSet<User> Users { get; set; } = null!;
-        public virtual DbSet<staff> staff { get; set; } = null!;
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
@@ -60,7 +59,47 @@ namespace InsuranceCardServer.Models
                     .WithMany(p => p.Accidents)
                     .HasForeignKey(d => d.ContractId)
                     .OnDelete(DeleteBehavior.ClientSetNull)
-                    .HasConstraintName("FK__accidents__contr__44FF419A");
+                    .HasConstraintName("FK__accidents__contr__5535A963");
+            });
+
+            modelBuilder.Entity<Account>(entity =>
+            {
+                entity.ToTable("accounts");
+
+                entity.Property(e => e.Id).HasColumnName("id");
+
+                entity.Property(e => e.Address)
+                    .HasMaxLength(255)
+                    .IsUnicode(false)
+                    .HasColumnName("address");
+
+                entity.Property(e => e.CitizenIdentification)
+                    .HasMaxLength(20)
+                    .IsUnicode(false)
+                    .HasColumnName("citizen_identification");
+
+                entity.Property(e => e.ContactNumber)
+                    .HasMaxLength(20)
+                    .IsUnicode(false)
+                    .HasColumnName("contact_number");
+
+                entity.Property(e => e.FullName)
+                    .HasMaxLength(100)
+                    .IsUnicode(false)
+                    .HasColumnName("full_name");
+
+                entity.Property(e => e.Role)
+                    .HasMaxLength(50)
+                    .IsUnicode(false)
+                    .HasColumnName("role");
+
+                entity.Property(e => e.UserId).HasColumnName("user_id");
+
+                entity.HasOne(d => d.User)
+                    .WithMany(p => p.Accounts)
+                    .HasForeignKey(d => d.UserId)
+                    .OnDelete(DeleteBehavior.ClientSetNull)
+                    .HasConstraintName("FK__accounts__user_i__4BAC3F29");
             });
 
             modelBuilder.Entity<Compensation>(entity =>
@@ -83,7 +122,7 @@ namespace InsuranceCardServer.Models
                     .WithMany(p => p.Compensations)
                     .HasForeignKey(d => d.ContractId)
                     .OnDelete(DeleteBehavior.ClientSetNull)
-                    .HasConstraintName("FK__compensat__contr__4AB81AF0");
+                    .HasConstraintName("FK__compensat__contr__5AEE82B9");
             });
 
             modelBuilder.Entity<CompensationRequest>(entity =>
@@ -110,7 +149,7 @@ namespace InsuranceCardServer.Models
                     .WithMany(p => p.CompensationRequests)
                     .HasForeignKey(d => d.ContractId)
                     .OnDelete(DeleteBehavior.ClientSetNull)
-                    .HasConstraintName("FK__compensat__contr__4E88ABD4");
+                    .HasConstraintName("FK__compensat__contr__5EBF139D");
             });
 
             modelBuilder.Entity<Contract>(entity =>
@@ -118,6 +157,8 @@ namespace InsuranceCardServer.Models
                 entity.ToTable("contracts");
 
                 entity.Property(e => e.Id).HasColumnName("id");
+
+                entity.Property(e => e.AccountId).HasColumnName("account_id");
 
                 entity.Property(e => e.Active)
                     .HasColumnName("active")
@@ -128,8 +169,6 @@ namespace InsuranceCardServer.Models
                     .IsUnicode(false)
                     .HasColumnName("contract_number");
 
-                entity.Property(e => e.CustomerId).HasColumnName("customer_id");
-
                 entity.Property(e => e.EndDate)
                     .HasColumnType("date")
                     .HasColumnName("end_date");
@@ -138,46 +177,11 @@ namespace InsuranceCardServer.Models
                     .HasColumnType("date")
                     .HasColumnName("start_date");
 
-                entity.HasOne(d => d.Customer)
+                entity.HasOne(d => d.Account)
                     .WithMany(p => p.Contracts)
-                    .HasForeignKey(d => d.CustomerId)
+                    .HasForeignKey(d => d.AccountId)
                     .OnDelete(DeleteBehavior.ClientSetNull)
-                    .HasConstraintName("FK__contracts__custo__3F466844");
-            });
-
-            modelBuilder.Entity<Customer>(entity =>
-            {
-                entity.ToTable("customers");
-
-                entity.Property(e => e.Id).HasColumnName("id");
-
-                entity.Property(e => e.Address)
-                    .HasMaxLength(255)
-                    .IsUnicode(false)
-                    .HasColumnName("address");
-
-                entity.Property(e => e.CitizenIdentification)
-                    .HasMaxLength(20)
-                    .IsUnicode(false)
-                    .HasColumnName("citizen_identification");
-
-                entity.Property(e => e.ContactNumber)
-                    .HasMaxLength(20)
-                    .IsUnicode(false)
-                    .HasColumnName("contact_number");
-
-                entity.Property(e => e.FullName)
-                    .HasMaxLength(100)
-                    .IsUnicode(false)
-                    .HasColumnName("full_name");
-
-                entity.Property(e => e.UserId).HasColumnName("user_id");
-
-                entity.HasOne(d => d.User)
-                    .WithMany(p => p.Customers)
-                    .HasForeignKey(d => d.UserId)
-                    .OnDelete(DeleteBehavior.ClientSetNull)
-                    .HasConstraintName("FK__customers__user___38996AB5");
+                    .HasConstraintName("FK__contracts__accou__4F7CD00D");
             });
 
             modelBuilder.Entity<Payment>(entity =>
@@ -200,7 +204,7 @@ namespace InsuranceCardServer.Models
                     .WithMany(p => p.Payments)
                     .HasForeignKey(d => d.ContractId)
                     .OnDelete(DeleteBehavior.ClientSetNull)
-                    .HasConstraintName("FK__payments__contra__4222D4EF");
+                    .HasConstraintName("FK__payments__contra__52593CB8");
             });
 
             modelBuilder.Entity<Punishment>(entity =>
@@ -223,7 +227,7 @@ namespace InsuranceCardServer.Models
                     .WithMany(p => p.Punishments)
                     .HasForeignKey(d => d.ContractId)
                     .OnDelete(DeleteBehavior.ClientSetNull)
-                    .HasConstraintName("FK__punishmen__contr__47DBAE45");
+                    .HasConstraintName("FK__punishmen__contr__5812160E");
             });
 
             modelBuilder.Entity<User>(entity =>
@@ -251,34 +255,6 @@ namespace InsuranceCardServer.Models
                     .HasMaxLength(50)
                     .IsUnicode(false)
                     .HasColumnName("username");
-            });
-
-            modelBuilder.Entity<staff>(entity =>
-            {
-                entity.Property(e => e.Id).HasColumnName("id");
-
-                entity.Property(e => e.Address)
-                    .HasMaxLength(255)
-                    .IsUnicode(false)
-                    .HasColumnName("address");
-
-                entity.Property(e => e.ContactNumber)
-                    .HasMaxLength(20)
-                    .IsUnicode(false)
-                    .HasColumnName("contact_number");
-
-                entity.Property(e => e.FullName)
-                    .HasMaxLength(100)
-                    .IsUnicode(false)
-                    .HasColumnName("full_name");
-
-                entity.Property(e => e.UserId).HasColumnName("user_id");
-
-                entity.HasOne(d => d.User)
-                    .WithMany(p => p.staff)
-                    .HasForeignKey(d => d.UserId)
-                    .OnDelete(DeleteBehavior.ClientSetNull)
-                    .HasConstraintName("FK__staff__user_id__3B75D760");
             });
 
             OnModelCreatingPartial(modelBuilder);

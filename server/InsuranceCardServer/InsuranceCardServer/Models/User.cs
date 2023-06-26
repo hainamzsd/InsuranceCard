@@ -7,8 +7,7 @@ namespace InsuranceCardServer.Models
     {
         public User()
         {
-            Customers = new HashSet<Customer>();
-            staff = new HashSet<staff>();
+            Accounts = new HashSet<Account>();
         }
 
         public int Id { get; set; }
@@ -17,7 +16,6 @@ namespace InsuranceCardServer.Models
         public string Email { get; set; } = null!;
         public string Role { get; set; } = null!;
 
-        public virtual ICollection<Customer> Customers { get; set; }
-        public virtual ICollection<staff> staff { get; set; }
+        public virtual ICollection<Account> Accounts { get; set; }
     }
 }

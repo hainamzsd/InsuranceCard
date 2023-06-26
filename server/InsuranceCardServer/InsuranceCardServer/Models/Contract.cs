@@ -15,13 +15,13 @@ namespace InsuranceCardServer.Models
         }
 
         public int Id { get; set; }
-        public int CustomerId { get; set; }
+        public int AccountId { get; set; }
         public string ContractNumber { get; set; } = null!;
         public DateTime StartDate { get; set; }
         public DateTime EndDate { get; set; }
         public bool? Active { get; set; }
 
-        public virtual Customer Customer { get; set; } = null!;
+        public virtual Account Account { get; set; } = null!;
         public virtual ICollection<Accident> Accidents { get; set; }
         public virtual ICollection<CompensationRequest> CompensationRequests { get; set; }
         public virtual ICollection<Compensation> Compensations { get; set; }
