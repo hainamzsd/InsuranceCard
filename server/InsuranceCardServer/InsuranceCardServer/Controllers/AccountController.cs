@@ -1,9 +1,5 @@
-﻿
-using InsuranceCardServer.Models;
-using Microsoft.AspNetCore.Http;
+﻿using InsuranceCardServer.Models;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore;
-using System.Runtime.Serialization;
 
 namespace InsuranceCardServer.Controllers
 {
@@ -110,8 +106,5 @@ namespace InsuranceCardServer.Controllers
                 return StatusCode(500, $"Error: {ex.Message}"); // Return 500 Internal Server Error if an exception occurs
             }
         }
-
-
-
     }
 }
