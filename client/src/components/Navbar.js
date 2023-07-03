@@ -4,7 +4,6 @@ import '../lib/animate/animate.min.css';
 import '../lib/owlcarousel/assets/owl.carousel.min.css';
 import '../lib/lightbox/css/lightbox.min.css';
 import PersonalInfo from '../pages/PersonalInfo';
-import App from '../App';
 import ReactDOM from "react-dom/client";
 import { BrowserRouter as Router, Route, Routes, Link } from 'react-router-dom';
 const Navbar = () => {
@@ -16,7 +15,7 @@ const Navbar = () => {
   useEffect(() => {
     const handleScroll = () => {
       const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
-      setIsTopOfPage(scrollTop === 0);
+      setIsTopOfPage(scrollTop === 0 );
     };
 
     window.addEventListener('scroll', handleScroll);
@@ -39,19 +38,14 @@ const Navbar = () => {
         <div className="navbar-nav mx-auto py-0">
           <Link to="/" className="nav-item nav-link">Home</Link>
           <Link to="/PersonalInfo" className="nav-item nav-link">Personal Info</Link>
-      
-
-          <Routes>
-              <Route path="/" element={<App />} />
-              <Route path="/PersonalInfo" element={<PersonalInfo />} />
-          </Routes>
-
           <div className="nav-item dropdown">
-            <a href="#" className="nav-link dropdown-toggle" data-bs-toggle="dropdown">Pages</a>
+            <Link to="/CustomerHistory" className="nav-link dropdown-toggle" data-bs-toggle="dropdown">Customer History</Link>
             <div className="dropdown-menu m-0">
-              <a href="team.html" className="dropdown-item">Our Team</a>
-              <a href="testimonial.html" className="dropdown-item">Testimonial</a>
-              <a href="404.html" className="dropdown-item">404 Page</a>
+              <Link href="team.html" className="dropdown-item">Payment History</Link>
+              <Link href="testimonial.html" className="dropdown-item">Accident History</Link>
+              <Link href="404.html" className="dropdown-item">Punishment History</Link>
+              <Link href="404.html" className="dropdown-item">Compensation History</Link>
+              <Link href="404.html" className="dropdown-item">Contract Information</Link>
             </div>
           </div>
           <a href="contact.html" className="nav-item nav-link">Contact</a>

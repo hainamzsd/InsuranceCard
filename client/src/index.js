@@ -8,6 +8,7 @@ import {
 } from "react-router-dom";
 import Home from './pages/Home';
 import PersonalInfo from './pages/PersonalInfo';
+import CustomerHistory from './pages/CustomerHistory';
 
 const router = createBrowserRouter([
   {
@@ -16,6 +17,9 @@ const router = createBrowserRouter([
   },{
     path: "/PersonalInfo",
     element: <PersonalInfo />,
+  },{
+    path: "/CustomerHistory",
+    element: <CustomerHistory />
   }
 ]);
 
