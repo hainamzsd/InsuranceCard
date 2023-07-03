@@ -11,9 +11,9 @@ namespace InsuranceCardServer.Controllers
     [Route("api/[AccounController]")]
     public class AccountController : ControllerBase
     {
-        private readonly Insurance_CardContext _context;
+        private readonly motorbike_insuranceContext _context;
 
-        public AccountController(Insurance_CardContext context)
+        public AccountController(motorbike_insuranceContext context)
         {
             _context = context;
         }
@@ -27,7 +27,7 @@ namespace InsuranceCardServer.Controllers
         [HttpGet("{id}")]
         public ActionResult<Account> GetAccountByAccountId(int id)
         {
-            Account acc = _context.Accounts.FirstOrDefault(x => x.Id == id);
+            Account acc = _context.Accounts.FirstOrDefault(x => x.AccountId == id);
             if (acc != null)
             {
                 return acc;
@@ -40,12 +40,12 @@ namespace InsuranceCardServer.Controllers
         {
             try
             {
-                Account existAcc = _context.Accounts.FirstOrDefault(x => x.Id == account.Id);
+                Account existAcc = _context.Accounts.FirstOrDefault(x => x.AccountId == account.AccountId);
                 if (existAcc == null)
                 {
                     _context.Accounts.Add(account);
                     _context.SaveChanges();
-                    return CreatedAtAction(nameof(GetAccountByAccountId), new { id = account.Id }, account);
+                    return CreatedAtAction(nameof(GetAccountByAccountId), new { id = account.AccountId }, account);
                 }
                 else
                 {
@@ -64,7 +64,7 @@ namespace InsuranceCardServer.Controllers
             try
             {
                 // Check if the account exists
-                Account account = _context.Accounts.FirstOrDefault(x => x.Id == id);
+                Account account = _context.Accounts.FirstOrDefault(x => x.AccountId == id);
                 if (account == null)
                 {
                     return NotFound(); // Return 404 Not Found if the account is not found
@@ -88,17 +88,16 @@ namespace InsuranceCardServer.Controllers
             try
             {
                 // Check if the account exists
-                Account account = _context.Accounts.FirstOrDefault(x => x.Id == id);
+                Account account = _context.Accounts.FirstOrDefault(x => x.AccountId == id);
                 if (account == null)
                 {
                     return NotFound(); // Return 404 Not Found if the account is not found
                 }
 
                 // Update the properties of the existing account
-                account.FullName = updatedAccount.FullName;
-                account.ContactNumber = updatedAccount.ContactNumber;
-                account.Address = updatedAccount.Address;
-                account.CitizenIdentification = updatedAccount.CitizenIdentification;
+                account.Username = updatedAccount.Username;
+                account.Password = updatedAccount.Password;
+                
                 // Update other properties as needed
 
                 // Save changes to the database

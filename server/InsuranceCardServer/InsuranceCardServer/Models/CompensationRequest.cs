@@ -5,7 +5,7 @@ namespace InsuranceCardServer.Models
 {
     public partial class CompensationRequest
     {
-        public int Id { get; set; }
+        public int RequestId { get; set; }
         public int ContractId { get; set; }
         public DateTime RequestDate { get; set; }
         public string? Description { get; set; }

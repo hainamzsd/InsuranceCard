@@ -14,7 +14,7 @@ namespace InsuranceCardServer.Models
             Punishments = new HashSet<Punishment>();
         }
 
-        public int Id { get; set; }
+        public int ContractId { get; set; }
         public int AccountId { get; set; }
         public string ContractNumber { get; set; } = null!;
         public DateTime StartDate { get; set; }
