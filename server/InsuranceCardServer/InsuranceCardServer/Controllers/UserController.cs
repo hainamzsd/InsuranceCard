@@ -3,11 +3,13 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace InsuranceCardServer.Controllers
 {
-    public class UsertController : ControllerBase
+    [ApiController]
+    [Route("api/[UserController]")]
+    public class UserController : ControllerBase
     {
         private readonly Insurance_CardContext _context;
 
-        public UsertController(Insurance_CardContext context)
+        public UserController(Insurance_CardContext context)
         {
             _context = context;
         }

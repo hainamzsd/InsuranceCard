@@ -7,6 +7,8 @@ using System.Runtime.Serialization;
 
 namespace InsuranceCardServer.Controllers
 {
+    [ApiController]
+    [Route("api/[AccounController]")]
     public class AccountController : ControllerBase
     {
         private readonly Insurance_CardContext _context;
