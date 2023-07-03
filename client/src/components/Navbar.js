@@ -48,7 +48,7 @@ const Navbar = () => {
               <Link href="404.html" className="dropdown-item">Contract Information</Link>
             </div>
           </div>
-          <a href="contact.html" className="nav-item nav-link">Contact</a>
+          <Link to="/RequestContract" className="nav-item nav-link">Request Contract</Link>
         </div>
         <a href="" className="btn rounded-pill py-2 px-4 ms-3 d-none d-lg-block">Get Started</a>
       </div>

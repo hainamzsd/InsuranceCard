@@ -9,6 +9,8 @@ import PaymentHistory from '../components/PaymentHistory';
 import AccidentHistory from '../components/AccidentHistory';
 import PunishmentHistory from '../components/PunishmentHistory';
 import CompensationHistory from '../components/CompensationHistory';
+import ContractInformation from '../components/ContractInformation';
+import Footer from '../components/Footer';
 const CustomerHistory = () => {
 
 
@@ -21,8 +23,9 @@ const CustomerHistory = () => {
 
     return (
         <div class="container-xxl bg-white p-0">
-            <div classname="container-xxl position-relative p-0">
                 <Navbar ></Navbar>
+
+            <div classname="container-xxl position-relative p-0">
 
                 <div class="container-xxl py-5 bg-primary hero-header">
                     <div class="container my-5 py-5 px-lg-5">
@@ -34,7 +37,7 @@ const CustomerHistory = () => {
                                     <ol class="breadcrumb justify-content-center">
                                         <li class="breadcrumb-item"><a class="text-white" href="#">Home</a></li>
                                         <li class="breadcrumb-item"><a class="text-white" href="#">Pages</a></li>
-                                        <li class="breadcrumb-item text-white active" aria-current="page">Personal Info</li>
+                                        <li class="breadcrumb-item text-white active" aria-current="page">Customer History</li>
                                     </ol>
                                 </nav>
                             </div>
@@ -42,7 +45,7 @@ const CustomerHistory = () => {
                     </div>
                 </div>
             </div>
-            <div>
+            <div >
                 <ul className="nav nav-tabs">
                     <li className="nav-item">
                         <button
@@ -76,6 +79,14 @@ const CustomerHistory = () => {
                             Compensation History
                         </button>
                     </li>
+                    <li className="nav-item">
+                        <button
+                            className={`nav-link ${activeTab === 'contractInfo' ? 'active' : ''}`}
+                            onClick={() => handleTabClick('contractInfo')}
+                        >
+                            Contract Information
+                        </button>
+                    </li>
                 </ul>
 
                 <div className="tab-content mt-3">
@@ -103,9 +114,15 @@ const CustomerHistory = () => {
                     >
                         <CompensationHistory />
                     </div>
+                    <div
+                        className={`tab-pane fade ${activeTab === 'contractInfo' ? 'show active' : ''}`}
+                        id="contractInfo"
+                    >
+                        <ContractInformation />
+                    </div>
                 </div>
             </div>
-
+            <Footer className="mt-5"></Footer>
         </div>
     )
 }

@@ -41,6 +41,7 @@ const CompensationHistory = () => {
         </a>
       ))}
     </div>
+    <a href="" className="btn btn-primary my-3 mx-3  ">Request Compensation</a>
   </div>
   )
 }

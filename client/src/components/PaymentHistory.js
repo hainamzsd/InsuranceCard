@@ -32,7 +32,7 @@ const PaymentHistory = (props) => {
 
   return (
     <div className=''>
-    <div className="list-group">
+    <div className="list-group ">
       {listItems.map((item, index) => (
         <a
           key={index}

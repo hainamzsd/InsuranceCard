@@ -9,6 +9,7 @@ import {
 import Home from './pages/Home';
 import PersonalInfo from './pages/PersonalInfo';
 import CustomerHistory from './pages/CustomerHistory';
+import RequestContract from './pages/RequestContract';
 
 const router = createBrowserRouter([
   {
@@ -20,6 +21,9 @@ const router = createBrowserRouter([
   },{
     path: "/CustomerHistory",
     element: <CustomerHistory />
+  },{
+    path: "/RequestContract",
+    element: <RequestContract />
   }
 ]);
 
