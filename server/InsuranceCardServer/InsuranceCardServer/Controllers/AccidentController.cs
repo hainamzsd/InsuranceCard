@@ -4,7 +4,7 @@ using System.Security.Principal;
 
 namespace InsuranceCardServer.Controllers
 {
-    [Route("api/[AccidentController]")]
+    [Route("api/[controller]")]
     [ApiController]
     public class AccidentController : ControllerBase
     {

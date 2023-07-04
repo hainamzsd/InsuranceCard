@@ -3,8 +3,8 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace InsuranceCardServer.Controllers
 {
+    [Route("api/[controller]")]
     [ApiController]
-    [Route("api/[AccounController]")]
     public class AccountController : ControllerBase
     {
         private readonly motorbike_insuranceContext _context;
