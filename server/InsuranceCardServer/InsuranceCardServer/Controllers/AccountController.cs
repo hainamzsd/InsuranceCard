@@ -17,7 +17,13 @@ namespace InsuranceCardServer.Controllers
         [HttpGet]
         public IEnumerable<Account> GetAllAccount()
         {
-            return _context.Accounts.ToList();
+
+            var list = _context.Accounts.ToList();
+            if (list != null)
+            {
+                return list;
+            }
+            return null;
         }
 
         [HttpGet("{id}")]
@@ -93,7 +99,7 @@ namespace InsuranceCardServer.Controllers
                 // Update the properties of the existing account
                 account.Username = updatedAccount.Username;
                 account.Password = updatedAccount.Password;
-                
+
                 // Update other properties as needed
 
                 // Save changes to the database
