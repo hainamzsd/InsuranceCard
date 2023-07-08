@@ -43,13 +43,13 @@ namespace InsuranceCardServer.Controllers
             try
             {
                 Account existAcc = _context.Accounts.FirstOrDefault(x => x.Username == username && x.Password == password);
-                if (existAcc == null)
+                if (existAcc != null)
                 {
-                    return existAcc;
+                    return Ok(existAcc); // 200 OK
                 }
                 else
                 {
-                    return Conflict("Account not exist"); // Return 409 Conflict if the account already exists
+                    return NotFound("Invalid username or password"); // 404 Not Found
                 }
             }
             catch (Exception ex)
