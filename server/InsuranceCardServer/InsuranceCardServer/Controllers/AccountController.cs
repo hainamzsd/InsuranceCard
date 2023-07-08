@@ -38,6 +38,27 @@ namespace InsuranceCardServer.Controllers
         }
 
         [HttpPost]
+        public ActionResult<Account> LoginAccount(string username, string password)
+        {
+            try
+            {
+                Account existAcc = _context.Accounts.FirstOrDefault(x => x.Username == username && x.Password == password);
+                if (existAcc == null)
+                {
+                    return existAcc;
+                }
+                else
+                {
+                    return Conflict("Account not exist"); // Return 409 Conflict if the account already exists
+                }
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(500, $"Error: {ex.Message}"); // Return 500 Internal Server Error if an exception occurs
+            }
+        }
+
+        [HttpPost]
         public ActionResult<Account> AddNewAccount(Account account)
         {
             try
