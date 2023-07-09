@@ -3,49 +3,61 @@ import '../css/central.css';
 import '../lib/animate/animate.min.css';
 import '../lib/owlcarousel/assets/owl.carousel.min.css';
 import '../lib/lightbox/css/lightbox.min.css';
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 import PersonalInfo from '../pages/PersonalInfo';
 import ReactDOM from "react-dom/client";
 import { Button, Modal, Form,Nav, Tab } from 'react-bootstrap';
 import { BrowserRouter as Router, Route, Routes, Link } from 'react-router-dom';
 const Navbar = () => {
+
+
   //login
-  const getUser = async () => {
-    try {
-      const response = await fetch('https://localhost:7184/api/Account/1');
-      if (!response.ok) {
-        throw new Error('API request failed');
-      }
-      const data = await response.json();
-      // Process the received data here
-      console.log(data);
-    } catch (error) {
-      console.error(error);
-    }
-  };
-
-  getUser();
-
-
   const getHeaderText = () => {
     return activeTab === 'login' ? 'Login' : 'Register';
   };
   const [showModal, setShowModal] = useState(false);
-  const [email, setEmail] = useState('');
+  const [isLogin, setIsLogin] = useState(false);
+  const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
   const [activeTab, setActiveTab] = useState('login');
   const handleTabChange = (tab) => setActiveTab(tab);
 
   const handleShowModal = () => setShowModal(true);
+  const handleLogout = () => {
+    sessionStorage.clear();
+  }
   const handleCloseModal = () => setShowModal(false);
-  const handleEmailChange = (e) => setEmail(e.target.value);
+  const handleUsernameChange = (e) => setUsername(e.target.value);
   const handlePasswordChange = (e) => setPassword(e.target.value);
   
   const handleLogin = (e) => {
     e.preventDefault();
-    // Perform login logic here
-    console.log('Login clicked');
-  };
+  
+    // Make the API call
+    fetch(`https://localhost:7184/api/Account/LoginAccount?username=${username}&password=${password}`
+    ,{method: 'POST'})
+      .then(response => response.json())
+      .then(data => {
+        // Check if the response is not null
+        if (data !== null) {
+          sessionStorage.setItem("user",data);
+          sessionStorage.setItem("accountId", data.accountId);
+          sessionStorage.setItem("infoId", data.accountId);
+      toast.success("Login Success");
+        } else {
+          toast.error("Wrong username or password");
 
+        }
+      })
+      .catch(error => {
+        console.error(error);
+        toast.error("Wrong username or password");
+
+      });
+
+      setShowModal(false);
+  };
   //register
   const [usernameRegister, setUsernameRegister] = useState('');
   const [emailRegister, setEmailRegister] = useState('');
@@ -56,8 +68,9 @@ const Navbar = () => {
   const [citizenIdentification, setCitizenIdentification] = useState('');
   const [rePasswordRegister, setRePasswordRegister] = useState('');
 
-  const handleEmailRegisterChange = (e) => setEmail(e.target.value);
-  const handlePasswordRegisterChange = (e) => setPassword(e.target.value);
+  const handleUsernameRegisterChange = (e) => setUsernameRegister(e.target.value);
+  const handleEmailRegisterChange = (e) => setEmailRegister(e.target.value);
+  const handlePasswordRegisterChange = (e) => setPasswordRegister(e.target.value);
   const handleFullNameChange = (e) => setFullName(e.target.value);
   const handleContactNumberChange = (e) => setContactNumber(e.target.value);
   const handleAddressChange = (e) => setAddress(e.target.value);
@@ -68,7 +81,6 @@ const Navbar = () => {
     // Perform register logic here
     console.log('Register clicked');
   };
-
 
   const [isTopOfPage, setIsTopOfPage] = useState(true);
 
@@ -88,6 +100,9 @@ const Navbar = () => {
     <nav className={`
             ${isTopOfPage ? '' : 'sticky-top'}
             navbar navbar-expand-lg navbar-light  px-4 px-lg-5 py-3 py-lg-0`}>
+      <div>
+        <ToastContainer />
+      </div>
       <a href="" className="navbar-brand p-0">
         <h1 className="m-0">Insurance Management  </h1>
       </a>
@@ -96,23 +111,35 @@ const Navbar = () => {
       </button>
       <div className="collapse navbar-collapse" id="navbarCollapse">
         <div className="navbar-nav mx-auto py-0">
+          {sessionStorage.getItem("user")!==null && (
+            <>
           <Link to="/" className="nav-item nav-link">Home</Link>
-          <Link to="/PersonalInfo" className="nav-item nav-link">Personal Info</Link>
-          <div className="nav-item dropdown">
-            <Link to="/CustomerHistory" className="nav-link dropdown-toggle" data-bs-toggle="dropdown">Customer History</Link>
-            <div className="dropdown-menu m-0">
-              <Link href="team.html" className="dropdown-item">Payment History</Link>
-              <Link href="testimonial.html" className="dropdown-item">Accident History</Link>
-              <Link href="404.html" className="dropdown-item">Punishment History</Link>
-              <Link href="404.html" className="dropdown-item">Compensation History</Link>
-              <Link href="404.html" className="dropdown-item">Contract Information</Link>
-            </div>
+
+        <Link to="/PersonalInfo" className="nav-item nav-link">Personal Info</Link>
+        <div className="nav-item dropdown">
+          <Link to="/CustomerHistory" className="nav-link dropdown-toggle" data-bs-toggle="dropdown">Customer History</Link>
+          <div className="dropdown-menu m-0">
+            <Link href="team.html" className="dropdown-item">Payment History</Link>
+            <Link href="testimonial.html" className="dropdown-item">Accident History</Link>
+            <Link href="404.html" className="dropdown-item">Punishment History</Link>
+            <Link href="404.html" className="dropdown-item">Compensation History</Link>
+            <Link href="404.html" className="dropdown-item">Contract Information</Link>
           </div>
-          <Link to="/RequestContract" className="nav-item nav-link">Request Contract</Link>
         </div>
+        <Link to="/RequestContract" className="nav-item nav-link">Request Contract</Link>
+        </>
+      )}
+          
+        </div>
+        {sessionStorage.getItem("user") === null ?
         <Button className="btn rounded-pill py-2 px-4 ms-3 d-none d-lg-block" variant="primary" onClick={handleShowModal}>
         Login
-      </Button>
+      </Button> :
+      <Button className="btn rounded-pill py-2 px-4 ms-3 d-none d-lg-block" variant="primary" onClick={handleLogout}>
+      Logout
+    </Button>
+      }
+        
       </div>
       
       <Modal show={showModal} onHide={handleCloseModal}>
@@ -132,13 +159,13 @@ const Navbar = () => {
             <Tab.Content>
               <Tab.Pane eventKey="login">
                 <Form onSubmit={handleLogin}>
-                  <Form.Group controlId="formEmail">
-                    <Form.Label>Email address</Form.Label>
+                  <Form.Group controlId="formUsername">
+                    <Form.Label>Username</Form.Label>
                     <Form.Control
-                      type="email"
-                      placeholder="Enter email"
-                      value={email}
-                      onChange={handleEmailChange}
+                      type="username"
+                      placeholder="Enter username"
+                      value={username}
+                      onChange={handleUsernameChange}
                     />
                   </Form.Group>
                   <Form.Group controlId="formPassword">
@@ -162,8 +189,8 @@ const Navbar = () => {
                     <Form.Control
                       type="email"
                       placeholder="Enter email"
-                      value={email}
-                      onChange={handleEmailChange}
+                      value={usernameRegister}
+                      onChange={handleUsernameRegisterChange}
                     />
                   </Form.Group>
                   <Form.Group controlId="formRegisterEmail">

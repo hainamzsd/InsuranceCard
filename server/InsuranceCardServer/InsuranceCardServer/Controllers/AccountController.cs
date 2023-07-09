@@ -37,7 +37,8 @@ namespace InsuranceCardServer.Controllers
             return NotFound();
         }
 
-        [HttpPost]
+
+        [HttpPost("LoginAccount")]
         public ActionResult<Account> LoginAccount(string username, string password)
         {
             try
@@ -58,7 +59,7 @@ namespace InsuranceCardServer.Controllers
             }
         }
 
-        [HttpPost]
+        [HttpPost("AddNewAccount")]
         public ActionResult<Account> AddNewAccount(Account account)
         {
             try

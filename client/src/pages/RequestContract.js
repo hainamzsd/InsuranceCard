@@ -6,10 +6,17 @@ import '../lib/lightbox/css/lightbox.min.css';
 import { Route, BrowserRouter as Router } from 'react-router-dom';
 import Navbar from '../components/Navbar';
 import Footer from '../components/Footer';
+import { Button } from 'react-bootstrap';
 const RequestContract = () => {
-  return (
-    <div class="container-xxl bg-white p-0">
-                <Navbar></Navbar>
+    const handleRequestContract = () => {
+        // Handle the request contract logic here
+        console.log('Contract requested');
+    };
+
+
+    return (
+        <div class="container-xxl bg-white p-0">
+            <Navbar></Navbar>
             <div classname="container-xxl position-relative p-0">
 
                 <div class="container-xxl py-5 bg-primary hero-header">
@@ -32,80 +39,61 @@ const RequestContract = () => {
             </div>
 
             <section>
-                <div class="container py-5">
 
-                    <div class="row">
-                        <div class="col-lg-4">
-                            <div class="card mb-4">
-                                <div class="card-body text-center">
-                                    <img src="https://i.kym-cdn.com/entries/icons/original/000/029/657/pikachu.jpg" alt="avatar"
-                                        class="rounded-circle img-fluid" style={{ width: "150px", height: "150px", objectFit: "cover" }} />
-                                    <h5 class="my-3">John Smith</h5>
-                                    <p class="text-muted mb-1">Full Stack Developer</p>
-                                    <p class="text-muted mb-4">Bay Area, San Francisco, CA</p>
-                                    {/* <div class="d-flex justify-content-center mb-2">
-                                        <button type="button" class="btn btn-primary">Follow</button>
-                                        <button type="button" class="btn btn-outline-primary ms-1">Message</button>
-                                    </div> */}
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-lg-8">
-                            <div class="card mb-4">
-                                <div class="card-body">
-                                    <div class="row">
-                                        <div class="col-sm-3">
-                                            <p class="mb-0">Full Name</p>
-                                        </div>
-                                        <div class="col-sm-9">
-                                            <p class="text-muted mb-0">Johnatan Smith</p>
-                                        </div>
-                                    </div>
-                                    <hr />
-                                    <div class="row">
-                                        <div class="col-sm-3">
-                                            <p class="mb-0">Email</p>
-                                        </div>
-                                        <div class="col-sm-9">
-                                            <p class="text-muted mb-0">example@example.com</p>
-                                        </div>
-                                    </div>
-                                    <hr />
-                                    <div class="row">
-                                        <div class="col-sm-3">
-                                            <p class="mb-0">Phone</p>
-                                        </div>
-                                        <div class="col-sm-9">
-                                            <p class="text-muted mb-0">(097) 234-5678</p>
-                                        </div>
-                                    </div>
-                                    <hr />
-                                    <div class="row">
-                                        <div class="col-sm-3">
-                                            <p class="mb-0">Mobile</p>
-                                        </div>
-                                        <div class="col-sm-9">
-                                            <p class="text-muted mb-0">(098) 765-4321</p>
-                                        </div>
-                                    </div>
-                                    <hr />
-                                    <div class="row">
-                                        <div class="col-sm-3">
-                                            <p class="mb-0">Address</p>
-                                        </div>
-                                        <div class="col-sm-9">
-                                            <p class="text-muted mb-0">Bay Area, San Francisco, CA</p>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
+                <div class="container py-5 px-5">
+                <h2 className='mb-4'>Motorbike Insurance Company Contract</h2>
+
+                    <div className="post">
+                        <p>
+                            This project introduces a comprehensive solution for motorbike insurance companies, addressing common issues
+                            found in current insurance systems. The existing systems often suffer from delays in contract renewals for
+                            customers and inconvenience in the validation process of insurance cards. This new system aims to overcome
+                            these challenges and provide enhanced services to both the insurance company and its customers.
+                        </p>
+                        <p>
+                            By adopting this motorbike insurance company contract, users will benefit from a range of improved services.
+                            Firstly, the contract ensures a streamlined and efficient contract renewal process, reducing delays and ensuring
+                            that customers' insurance coverage remains up to date. Additionally, it simplifies the validation process of
+                            insurance cards, making it more convenient and accessible for both customers and insurance company personnel.
+                        </p>
+                        <p>
+                            Users of this system will have access to a user-friendly interface that allows for easy management of insurance
+                            policies. They can quickly check the status of their contracts, review policy details, and conveniently renew
+                            their motorbike insurance policies online. The system also provides automated notifications for upcoming
+                            renewals, ensuring that customers never miss an important deadline.
+                        </p>
+                        <p>
+                            As for the financial aspect, users will be required to pay the applicable premium for their motorbike insurance
+                            coverage. The specific premium amount will depend on factors such as the motorbike's value, the coverage level
+                            selected, and the user's risk profile. The system offers flexible payment options, allowing users to choose
+                            monthly, quarterly, or annual payment plans according to their preference and financial capabilities.
+                        </p>
+                        <p>
+                            By requesting this motorbike insurance company contract, users can take advantage of the improved services,
+                            streamlined processes, and convenient management features it offers. Click the button below to initiate the
+                            contract request process and start enjoying the benefits of this advanced motorbike insurance solution.
+                        </p>
+                        <p>
+                            In this contract, users will have the following benefits:
+                            <ul>
+                                <li>Access to premium features and services</li>
+                                <li>24/7 customer support</li>
+                                <li>Discounts on selected products</li>
+                            </ul>
+                        </p>
+                        <p>
+                            The monthly subscription fee for this contract is $19.99. Users will be billed automatically each month.
+                            Additional terms and conditions apply.
+                        </p>
+                        <Button variant="primary" onClick={handleRequestContract}>
+                            Request Contract
+                        </Button>
                     </div>
                 </div>
             </section>
             <Footer></Footer>
         </div>
-  )
+    )
 }
 
 export default RequestContract
