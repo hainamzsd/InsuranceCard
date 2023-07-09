@@ -37,6 +37,19 @@ namespace InsuranceCardServer.Controllers
             return NotFound();
         }
 
+        [HttpGet("GetPaymentListByContract/{id}")]
+        public ActionResult<IEnumerable<Payment>> GetPaymentByContractId(int id)
+        {
+            var payments = _context.Payments.Where(x => x.ContractId == id).ToList();
+
+            if (payments != null)
+            {
+                return payments;
+            }
+
+            return NotFound();
+        }
+
         [HttpPost]
         public IActionResult CreatePayment(Payment payment)
         {

@@ -4,6 +4,8 @@ using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Text.Json;
+using System.Text.Json.Serialization;
 
 namespace InsuranceCardServer.Controllers
 {
@@ -12,15 +14,19 @@ namespace InsuranceCardServer.Controllers
     public class ContractController : ControllerBase
     {
         private readonly motorbike_insuranceContext _context;
+        private readonly JsonSerializerOptions _jsonOptions;
 
         public ContractController(motorbike_insuranceContext context)
         {
             _context = context;
+            _jsonOptions = new JsonSerializerOptions
+            {
+                ReferenceHandler = ReferenceHandler.Preserve,
+                MaxDepth = 32
+            };
         }
 
-        public ContractController()
-        {
-        }
+     
 
         [HttpGet]
         public ActionResult<IEnumerable<Contract>> GetAllContracts()
@@ -32,11 +38,39 @@ namespace InsuranceCardServer.Controllers
         [HttpGet("{id}")]
         public ActionResult<Contract> GetContractById(int id)
         {
-            var contract = _context.Contracts.FirstOrDefault(x => x.ContractId == id);
+            var contract = _context.Contracts
+               .Include(c => c.Payments)
+               .Include(c => c.Accidents)
+               .Include(c => c.Punishments)
+               .Include(c => c.Compensations)
+               .Include(c => c.CompensationRequests)
+               .FirstOrDefault(x => x.ContractId == id);
+
+            if (contract != null)   
+            {
+                var json = JsonSerializer.Serialize(contract, _jsonOptions);
+                return Content(json, "application/json");
+            }
+
+
+            return NotFound();
+        }
+
+        [HttpGet("GetByAccount/{id}")]
+        public ActionResult<IEnumerable<Contract>> GetContractByAccountId(int id)
+        {
+            var contract = _context.Contracts
+              .Include(c => c.Payments)
+              .Include(c => c.Accidents)
+              .Include(c => c.Punishments)
+              .Include(c => c.Compensations)
+              .Include(c => c.CompensationRequests)
+              .Where(x => x.AccountId == id).ToList();
 
             if (contract != null)
             {
-                return contract;
+                var json = JsonSerializer.Serialize(contract, _jsonOptions);
+                return Content(json, "application/json");
             }
 
             return NotFound();
