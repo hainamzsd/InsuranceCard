@@ -121,6 +121,11 @@ namespace InsuranceCardServer.Controllers
                 // Update the properties of the existing account
                 account.Username = updatedAccount.Username;
                 account.Password = updatedAccount.Password;
+                // Update other properties
+                account.User.Email = updatedAccount.User.Email;
+                account.User.ContactNumber = updatedAccount.User.ContactNumber;
+                account.User.Address = updatedAccount.User.Address;
+
 
                 // Update other properties as needed
 
