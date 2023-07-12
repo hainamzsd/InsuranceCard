@@ -81,6 +81,19 @@ namespace InsuranceCardServer.Controllers
             }
         }
 
+        [HttpGet("GetAccidentListByContract/{id}")]
+        public ActionResult<IEnumerable<Accident>> GetAccidentByContractId(int id)
+        {
+            var accidents = _context.Accidents.Where(x => x.ContractId == id).ToList();
+
+            if (accidents != null)
+            {
+                return accidents;
+            }
+
+            return NotFound();
+        }
+
         [HttpDelete("{id}")]
         public IActionResult DeleteAccident(int id)
         {

@@ -17,7 +17,6 @@ const PersonalInfo = () => {
                 // Check if the response is successful
                 if (data) {
                     setUserData(data);
-                    console.log(data);
                 } else {
                     // Handle error cases
                     console.error('Failed to fetch userinfo');

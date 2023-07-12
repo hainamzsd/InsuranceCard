@@ -58,6 +58,65 @@ const Navbar = () => {
 
       setShowModal(false);
   };
+
+  const [userData, setUserData] = useState(null);
+  if(sessionStorage.getItem("infoId") !== null){
+      fetch(`https://localhost:7184/api/Userinfo/${sessionStorage.getItem("infoId")}`)
+          .then(response => response.json())
+          .then(data => {
+              // Check if the response is successful
+              if (data) {
+                  setUserData(data);
+              } else {
+                  // Handle error cases
+                  console.error('Failed to fetch userinfo');
+              }
+          })
+          .catch(error => {
+              console.error('Error occurred while fetching userinfo:', error);
+          });
+}
+
+
+  const render = (userInfo) => {
+    if(sessionStorage.getItem("user") === null){
+      return <Link to="/" className="nav-item nav-link"></Link>
+    }
+
+    if (sessionStorage.getItem("user") !== null && userData?.role === "customer") {
+      return (
+        <>
+          <Link to="/" className="nav-item nav-link">Home</Link>
+
+          <Link to="/PersonalInfo" className="nav-item nav-link">Personal Info</Link>
+          <div className="nav-item dropdown">
+            <Link to="/CustomerHistory" className="nav-link dropdown-toggle" data-bs-toggle="dropdown">Customer History</Link>
+            <div className="dropdown-menu m-0">
+              <Link href="team.html" className="dropdown-item">Payment History</Link>
+              <Link href="testimonial.html" className="dropdown-item">Accident History</Link>
+              <Link href="404.html" className="dropdown-item">Punishment History</Link>
+              <Link href="404.html" className="dropdown-item">Compensation History</Link>
+              <Link href="404.html" className="dropdown-item">Contract Information</Link>
+            </div>
+          </div>
+          <Link to="/RequestContract" className="nav-item nav-link">Request Contract</Link>
+        </>
+      )
+    }
+    if(sessionStorage.getItem("user") !== null && userData?.role !== "customer"){
+      return (
+        <>
+        <Link to="/AccountEditPage" className="nav-item nav-link">Account Edit</Link>
+  
+        <Link to="/EmployeePage" className="nav-item nav-link">Employee Page</Link>
+     
+      </>
+      )
+    }
+  }
+
+
+  
   //register
   const [usernameRegister, setUsernameRegister] = useState('');
   const [emailRegister, setEmailRegister] = useState('');
@@ -111,24 +170,7 @@ const Navbar = () => {
       </button>
       <div className="collapse navbar-collapse" id="navbarCollapse">
         <div className="navbar-nav mx-auto py-0">
-          {sessionStorage.getItem("user")!==null && (
-            <>
-          <Link to="/" className="nav-item nav-link">Home</Link>
-
-          <Link to="/EmployeePage" className="nav-item nav-link">Personal Info</Link>
-        <div className="nav-item dropdown">
-          <Link to="/CustomerHistory" className="nav-link dropdown-toggle" data-bs-toggle="dropdown">Customer History</Link>
-          <div className="dropdown-menu m-0">
-            <Link href="team.html" className="dropdown-item">Payment History</Link>
-            <Link href="testimonial.html" className="dropdown-item">Accident History</Link>
-            <Link href="404.html" className="dropdown-item">Punishment History</Link>
-            <Link href="404.html" className="dropdown-item">Compensation History</Link>
-            <Link href="404.html" className="dropdown-item">Contract Information</Link>
-          </div>
-        </div>
-        <Link to="/RequestContract" className="nav-item nav-link">Request Contract</Link>
-        </>
-      )}
+          {render(userData)}
           
         </div>
         {sessionStorage.getItem("user") === null ?

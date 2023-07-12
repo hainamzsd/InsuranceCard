@@ -1,28 +1,69 @@
-import React, {useState} from 'react'
+import React, {useState, useEffect} from 'react';
 import '../css/central.css';
 import '../lib/animate/animate.min.css';
 import '../lib/owlcarousel/assets/owl.carousel.min.css';
 import '../lib/lightbox/css/lightbox.min.css';
 const AccidentHistory = () => {
+  const [contract, setContract] = useState(null);
+  const [accident, setAccident] = useState(null);
+  
+  useEffect(() => {
+    fetch(`https://localhost:7184/api/Contract/GetByAccount/${sessionStorage.getItem("accountId")}`)
+      .then(response => response.json())
+      .then(data => {
+        // Check if the response is successful
+        if (data) {
+          setContract(data);
+        } else {
+          // Handle error cases
+          console.error('Failed to fetch userinfo');
+        }
+      })
+      .catch(error => {
+        console.error('Error occurred while fetching userinfo:', error);
+      });
+  }, []);
+
+  if(contract !==null){
+fetch(`https://localhost:7184/api/Accident/GetAccidentListByContract/${contract.$id}`)
+        .then(response => response.json())
+        .then(data => {
+          // Check if the response is successful
+          if (data) {
+            setAccident(data);
+          } else {
+            // Handle error cases
+            console.error('Failed to fetch userinfo');
+          }
+        })
+        .catch(error => {
+          console.error('Error occurred while fetching userinfo:', error);
+        });
+  
+  }
+
+
+
   const [activeItem, setActiveItem] = useState(null);
 
   const handleItemClick = (index) => {
     setActiveItem(index);
   };
 
-  const listItems = [
-    {
-      accidentDate: '1/1/2202',
-      location: 'Ha Noi',
-      description: "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged.",
-    },
-  ];
 
+  function formatDate(paymentDate) {
+    const formattedDate = new Date(paymentDate).toLocaleDateString('en-GB', {
+      day: '2-digit',
+      month: '2-digit',
+      year: 'numeric'
+    });
+    return formattedDate;
+  }
 
   return (
     <div className=''>
     <div className="list-group">
-      {listItems.map((item, index) => (
+      {accident?.map((item, index) => (
         <a
           key={index}
           href="#"
@@ -33,7 +74,7 @@ const AccidentHistory = () => {
         >
           <div className="d-flex w-100 justify-content-between">
             <h5 className={`mb-1 ${activeItem === index ? 'text-light' : ''}`}>
-              Accident Date: {item.accidentDate}
+              Accident Date: {formatDate(item.accidentDate)}
             </h5>
             <small>{item.location}</small>
           </div>

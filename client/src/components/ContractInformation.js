@@ -1,6 +1,26 @@
-import React from 'react'
+import React, {useState, useEffect} from 'react'
 
 const ContractInformation = () => {
+
+  const [contract, setContract] = useState(null);
+  
+  useEffect(() => {
+    fetch(`https://localhost:7184/api/Contract/GetByAccount/${sessionStorage.getItem("accountId")}`)
+      .then(response => response.json())
+      .then(data => {
+        // Check if the response is successful
+        if (data) {
+          setContract(data);
+        } else {
+          // Handle error cases
+          console.error('Failed to fetch userinfo');
+        }
+      })
+      .catch(error => {
+        console.error('Error occurred while fetching userinfo:', error);
+      });
+  }, []);
+
 
   const listItems = [
     {

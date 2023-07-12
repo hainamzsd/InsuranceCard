@@ -24,14 +24,14 @@ const PaymentHistory = (props) => {
         console.error('Error occurred while fetching userinfo:', error);
       });
   }, []);
-
   if(contract !==null){
-      fetch(`https://localhost:7184/api/Payment/GetPaymentListByContract/1`)
+      fetch(`https://localhost:7184/api/Payment/GetPaymentListByContract/${contract.$id}`)
         .then(response => response.json())
         .then(data => {
           // Check if the response is successful
           if (data) {
             setPayments(data);
+          console.log(data);
           } else {
             // Handle error cases
             console.error('Failed to fetch userinfo');
@@ -58,27 +58,6 @@ const PaymentHistory = (props) => {
     setActiveItem(index);
   };
 
-  console.log(payments);
-
-  const listItems = [
-    {
-      paymentDate: '1/1/2202',
-      amount: '23$',
-      description: 'Pay successful',
-    },
-    {
-      paymentDate: '2/1/2202',
-      amount: '35$',
-      description: 'Pay successful',
-    },
-    {
-      paymentDate: '3/1/2202',
-      amount: '42$',
-      description: 'Pay successful',
-    },
-  ];
-
-
   return (
     <div className=''>
       <div className="list-group ">
@@ -92,11 +71,11 @@ const PaymentHistory = (props) => {
           >
             <div className="d-flex w-100 justify-content-between">
               <h5 className={`mb-1 ${activeItem === index ? 'text-light' : ''}`}>
-                Payment Date: {formatDate(item.paymentDate)}
+                Payment Date: {formatDate(item?.paymentDate)}
               </h5>
-              <h5 className={` ${activeItem === index ? 'text-light' : 'text-success'}`}>{item.amount} $</h5>
+              <h5 className={` ${activeItem === index ? 'text-light' : 'text-success'}`}>{item?.amount} $</h5>
             </div>
-            <p className="mb-1">{item.paymentMethod}</p>
+            <p className="mb-1">{item?.paymentMethod}</p>
           </a>
         ))}
       </div>

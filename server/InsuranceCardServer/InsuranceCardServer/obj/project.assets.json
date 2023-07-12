@@ -11280,23 +11280,23 @@
     ]
   },
   "packageFolders": {
-    "C:\\Users\\quang\\.nuget\\packages\\": {},
+    "C:\\Users\\ICT\\.nuget\\packages\\": {},
     "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "E:\\admin\\InsuranceCard\\server\\InsuranceCardServer\\InsuranceCardServer\\InsuranceCardServer.csproj",
+      "projectUniqueName": "E:\\FPT\\SWD\\InsuranceCard\\server\\InsuranceCardServer\\InsuranceCardServer\\InsuranceCardServer.csproj",
       "projectName": "InsuranceCardServer",
-      "projectPath": "E:\\admin\\InsuranceCard\\server\\InsuranceCardServer\\InsuranceCardServer\\InsuranceCardServer.csproj",
-      "packagesPath": "C:\\Users\\quang\\.nuget\\packages\\",
-      "outputPath": "E:\\admin\\InsuranceCard\\server\\InsuranceCardServer\\InsuranceCardServer\\obj\\",
+      "projectPath": "E:\\FPT\\SWD\\InsuranceCard\\server\\InsuranceCardServer\\InsuranceCardServer\\InsuranceCardServer.csproj",
+      "packagesPath": "C:\\Users\\ICT\\.nuget\\packages\\",
+      "outputPath": "E:\\FPT\\SWD\\InsuranceCard\\server\\InsuranceCardServer\\InsuranceCardServer\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
         "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
       ],
       "configFilePaths": [
-        "C:\\Users\\quang\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Users\\ICT\\AppData\\Roaming\\NuGet\\NuGet.Config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
       ],
@@ -11305,6 +11305,7 @@
       ],
       "sources": {
         "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
+        "C:\\Program Files\\dotnet\\library-packs": {},
         "https://api.nuget.org/v3/index.json": {}
       },
       "frameworks": {

@@ -52,6 +52,22 @@ namespace InsuranceCardServer.Controllers
             }
         }
 
+
+        [HttpGet("GetCRListByContract/{id}")]
+        public ActionResult<IEnumerable<CompensationRequest>> GetCRByContractId(int id)
+        {
+            var crs = _context.CompensationRequests.Where(x => x.ContractId == id).ToList();
+
+            if (crs != null)
+            {
+                return crs;
+            }
+
+            return NotFound();
+        }
+
+
+
         [HttpPut("{id}")]
         public IActionResult UpdateCompensationRequest(int id, CompensationRequest updatedRequest)
         {
