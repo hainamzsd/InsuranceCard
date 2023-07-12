@@ -1,15 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Text.Json.Serialization;
 
 namespace InsuranceCardServer.Models
 {
     public partial class Userinfo
     {
-        public Userinfo()
-        {
-            Accounts = new HashSet<Account>();
-        }
-
+    
         public int UserId { get; set; }
         public string Username { get; set; } = null!;
         public string Email { get; set; } = null!;
@@ -18,7 +15,7 @@ namespace InsuranceCardServer.Models
         public string? Address { get; set; }
         public string CitizenIdentification { get; set; } = null!;
         public string Role { get; set; } = null!;
-
+        [JsonIgnore]
         public virtual ICollection<Account> Accounts { get; set; }
     }
 }

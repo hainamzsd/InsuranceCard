@@ -59,14 +59,48 @@ namespace InsuranceCardServer.Controllers
             return NotFound();
         }
 
+        [HttpPost("CancelContract/{contractId}")]
+        public IActionResult CancelContract(int contractId)
+        {
+            try
+            {
+                var contract = _context.Contracts.FirstOrDefault(c => c.ContractId == contractId);
+
+                if (contract == null)
+                {
+                    return NotFound("Contract not found");
+                }
+
+                contract.Active = false;
+                _context.SaveChanges();
+
+                return Ok("Contract canceled successfully");
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(500, $"Error: {ex.Message}");
+            }
+        }
+
+
+
         [HttpPost]
         public IActionResult CreateContract(Contract contract)
         {
             try
             {
-                _context.Contracts.Add(contract);
+                Contract newContract = new Contract()
+                {
+                    AccountId = contract.AccountId,
+                    ContractNumber = contract.ContractNumber,
+                    StartDate = contract.StartDate,
+                    EndDate = contract.EndDate,
+                    Active = contract.Active,
+
+                };
+                _context.Contracts.Add(newContract);
                 _context.SaveChanges();
-                return CreatedAtAction(nameof(GetContractById), new { id = contract.ContractId }, contract);
+                return Ok(newContract);
             }
             catch (Exception ex)
             {

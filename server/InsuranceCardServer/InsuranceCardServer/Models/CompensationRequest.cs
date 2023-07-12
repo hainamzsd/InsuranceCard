@@ -11,6 +11,6 @@ namespace InsuranceCardServer.Models
         public string? Description { get; set; }
         public bool? Resolved { get; set; }
 
-        public virtual Contract Contract { get; set; } = null!;
+        public virtual Contract? Contract { get; set; } = null!;
     }
 }

@@ -11,6 +11,6 @@ namespace InsuranceCardServer.Models
         public DateTime PunishmentDate { get; set; }
         public string? Description { get; set; }
         [JsonIgnore]
-        public virtual Contract Contract { get; set; } = null!;
+        public virtual Contract? Contract { get; set; } = null!;
     }
 }

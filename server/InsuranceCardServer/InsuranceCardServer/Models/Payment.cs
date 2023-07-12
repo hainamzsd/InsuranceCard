@@ -12,6 +12,6 @@ namespace InsuranceCardServer.Models
         public decimal Amount { get; set; }
         public string PaymentMethod { get; set; } = null!;
         [JsonIgnore]
-        public virtual Contract Contract { get; set; } = null!;
+        public virtual Contract? Contract { get; set; } = null!;
     }
 }

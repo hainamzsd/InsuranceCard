@@ -6,16 +6,53 @@ import '../lib/lightbox/css/lightbox.min.css';
 import { Route, BrowserRouter as Router } from 'react-router-dom';
 import Navbar from '../components/Navbar';
 import Footer from '../components/Footer';
-import { Button } from 'react-bootstrap';
+import { Button, Toast } from 'react-bootstrap';
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 const RequestContract = () => {
-    const handleRequestContract = () => {
-        // Handle the request contract logic here
-        console.log('Contract requested');
-    };
 
+    const handleRequestContract = async () => {
+        try {
+            const currentDate = new Date();
+            const endDate = new Date(currentDate.getFullYear() + 2, currentDate.getMonth(), currentDate.getDate());
+            const id = sessionStorage.getItem("accountId");
+            const contractNumber = Math.floor(Math.random() * 9000000000) + 1000000000;
+
+            const contractData = {
+                accountId: `${id}`,
+                contractNumber: contractNumber.toString(),
+                startDate: currentDate.toISOString(),
+                endDate: endDate.toISOString(),
+                active: false,
+                accidents: [],
+                compensationRequests: [],
+                compensations: [],
+                payments: [],
+                punishments: []
+            };
+
+            const response = await fetch('https://localhost:7184/api/Contract', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify(contractData)
+            });
+
+            if (response.ok) {
+                const data = await response.json();
+                toast.success("Created Contract");
+            } else {
+                toast.error("Created Fail");
+            }
+        } catch (error) {
+            toast.error("Created Fail");
+        }
+    };
 
     return (
         <div class="container-xxl bg-white p-0">
+            <ToastContainer></ToastContainer>
             <Navbar></Navbar>
             <div classname="container-xxl position-relative p-0">
 
@@ -41,7 +78,7 @@ const RequestContract = () => {
             <section>
 
                 <div class="container py-5 px-5">
-                <h2 className='mb-4'>Motorbike Insurance Company Contract</h2>
+                    <h2 className='mb-4'>Motorbike Insurance Company Contract</h2>
 
                     <div className="post">
                         <p>
