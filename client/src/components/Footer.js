@@ -3,6 +3,8 @@ import '../css/central.css';
 import '../lib/animate/animate.min.css';
 import '../lib/owlcarousel/assets/owl.carousel.min.css';
 import '../lib/lightbox/css/lightbox.min.css';
+
+
 const Footer = () => {
   return (
     <div className="container-fluid bg-primary text-light footer wow fadeIn" data-wow-delay="0.1s">

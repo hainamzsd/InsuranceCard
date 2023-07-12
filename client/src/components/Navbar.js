@@ -115,7 +115,7 @@ const Navbar = () => {
             <>
           <Link to="/" className="nav-item nav-link">Home</Link>
 
-        <Link to="/PersonalInfo" className="nav-item nav-link">Personal Info</Link>
+          <Link to="/EmployeePage" className="nav-item nav-link">Personal Info</Link>
         <div className="nav-item dropdown">
           <Link to="/CustomerHistory" className="nav-link dropdown-toggle" data-bs-toggle="dropdown">Customer History</Link>
           <div className="dropdown-menu m-0">

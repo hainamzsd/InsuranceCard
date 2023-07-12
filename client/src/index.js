@@ -10,6 +10,10 @@ import Home from './pages/Home';
 import PersonalInfo from './pages/PersonalInfo';
 import CustomerHistory from './pages/CustomerHistory';
 import RequestContract from './pages/RequestContract';
+import EmployeePage from './components/EmployeePage';
+import CustomerPage from './components/CustomerPage';
+import ContractPage from './components/ContractPage';
+import AccountEditPage from './components/AccountEditPage';
 
 const router = createBrowserRouter([
   {
@@ -24,6 +28,22 @@ const router = createBrowserRouter([
   },{
     path: "/RequestContract",
     element: <RequestContract />
+  },
+   {
+    path: "/EmployeePage",
+    element: <EmployeePage />
+  },
+  {
+    path: "/CustomerPage",
+    element: <CustomerPage />
+  },
+  {
+    path: "/ContactPage",
+    element: <ContractPage />
+  },
+  {
+    path:"/AccountEditPage",
+    element: <AccountEditPage />
   }
 ]);
 
