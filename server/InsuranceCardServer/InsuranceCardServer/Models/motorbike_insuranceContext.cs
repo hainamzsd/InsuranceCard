@@ -33,8 +33,10 @@ namespace InsuranceCardServer.Models
                                                 .SetBasePath(Directory.GetCurrentDirectory())
                                                 .AddJsonFile("appsettings.json", optional: true, reloadOnChange: true);
                 IConfigurationRoot configuration = builder.Build();
-                optionsBuilder.UseSqlServer(configuration.GetConnectionString("MyCnn"));
+                optionsBuilder.UseSqlServer(configuration.GetConnectionString("MyCnn"),
+                    sqlServerOptionsAction: options => options.EnableRetryOnFailure());
             }
+        
         }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)

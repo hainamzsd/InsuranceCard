@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Text.Json.Serialization;
 
 namespace InsuranceCardServer.Models
 {
@@ -10,7 +11,7 @@ namespace InsuranceCardServer.Models
         public DateTime PaymentDate { get; set; }
         public decimal Amount { get; set; }
         public string PaymentMethod { get; set; } = null!;
-
+        [JsonIgnore]
         public virtual Contract Contract { get; set; } = null!;
     }
 }

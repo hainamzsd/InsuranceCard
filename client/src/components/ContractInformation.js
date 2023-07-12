@@ -22,6 +22,7 @@ const ContractInformation = () => {
   }, []);
 
 
+
   const listItems = [
     {
       contractNumber: '412',
@@ -36,15 +37,28 @@ const ContractInformation = () => {
     },
   ];
 
+
+  function formatDate(paymentDate) {
+    const formattedDate = new Date(paymentDate).toLocaleDateString('en-GB', {
+      day: '2-digit',
+      month: '2-digit',
+      year: 'numeric'
+    });
+    return formattedDate;
+  }
+
+  console.log(contract)
+
+
   return (
     <>
-      {listItems?.map((item, index) => (
+      {contract?.map((item, index) => (
         <div className="card my-3" >
           <h5 className="card-header">Contract Number: {item.contractNumber}</h5>
           <div className="card-body">
-            <h5 className="card-title">Active: <span className='text-success'>{item.active}</span></h5>
-            <div className="card-text">Start Date: {item.startDate}</div>
-            <div className="card-text">Start Date: {item.endDate}</div>
+            <h5 className="card-title">Active: <span className='text-success'> {item.active ? "True" : "False"}</span></h5>
+            <div className="card-text">Start Date: {formatDate(item.startDate)}</div>
+            <div className="card-text">Start Date: {formatDate(item.endDate)}</div>
             <a href="#" className="btn btn-primary mt-2">Renew Contract</a>
             <a href="#" className="btn btn-primary mx-3 mt-2">Cancel Contract</a>
           </div>

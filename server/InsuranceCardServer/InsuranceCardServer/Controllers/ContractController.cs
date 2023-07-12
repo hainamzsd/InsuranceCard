@@ -14,16 +14,11 @@ namespace InsuranceCardServer.Controllers
     public class ContractController : ControllerBase
     {
         private readonly motorbike_insuranceContext _context;
-        private readonly JsonSerializerOptions _jsonOptions;
 
         public ContractController(motorbike_insuranceContext context)
         {
             _context = context;
-            _jsonOptions = new JsonSerializerOptions
-            {
-                ReferenceHandler = ReferenceHandler.Preserve,
-                MaxDepth = 32
-            };
+        
         }
 
      
@@ -39,17 +34,11 @@ namespace InsuranceCardServer.Controllers
         public ActionResult<Contract> GetContractById(int id)
         {
             var contract = _context.Contracts
-               .Include(c => c.Payments)
-               .Include(c => c.Accidents)
-               .Include(c => c.Punishments)
-               .Include(c => c.Compensations)
-               .Include(c => c.CompensationRequests)
                .FirstOrDefault(x => x.ContractId == id);
 
             if (contract != null)   
             {
-                var json = JsonSerializer.Serialize(contract, _jsonOptions);
-                return Content(json, "application/json");
+                return contract;
             }
 
 
@@ -60,17 +49,11 @@ namespace InsuranceCardServer.Controllers
         public ActionResult<IEnumerable<Contract>> GetContractByAccountId(int id)
         {
             var contract = _context.Contracts
-              .Include(c => c.Payments)
-              .Include(c => c.Accidents)
-              .Include(c => c.Punishments)
-              .Include(c => c.Compensations)
-              .Include(c => c.CompensationRequests)
               .Where(x => x.AccountId == id).ToList();
 
             if (contract != null)
             {
-                var json = JsonSerializer.Serialize(contract, _jsonOptions);
-                return Content(json, "application/json");
+                return contract;
             }
 
             return NotFound();

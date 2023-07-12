@@ -45,6 +45,7 @@ const Navbar = () => {
           sessionStorage.setItem("accountId", data.accountId);
           sessionStorage.setItem("infoId", data.accountId);
       toast.success("Login Success");
+      window.location.reload();
         } else {
           toast.error("Wrong username or password");
 

@@ -25,7 +25,7 @@ const AccidentHistory = () => {
   }, []);
 
   if(contract !==null){
-fetch(`https://localhost:7184/api/Accident/GetAccidentListByContract/${contract.$id}`)
+fetch(`https://localhost:7184/api/Accident/GetAccidentListByAccountId/${sessionStorage.getItem("accountId")}`)
         .then(response => response.json())
         .then(data => {
           // Check if the response is successful

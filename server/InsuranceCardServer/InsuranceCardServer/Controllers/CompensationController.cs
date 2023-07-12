@@ -79,10 +79,10 @@ namespace InsuranceCardServer.Controllers
 
 
 
-        [HttpGet("GetCompensationListByContract/{id}")]
-        public ActionResult<IEnumerable<Compensation>> GetCompensationByContractId(int id)
+        [HttpGet("GetCompensationListByAccount/{id}")]
+        public ActionResult<IEnumerable<Compensation>> GetCompensationByAccountId(int id)
         {
-            var compensations = _context.Compensations.Where(x => x.ContractId == id).ToList();
+            var compensations = _context.Compensations.Where(x => x.Contract.AccountId == id).ToList();
 
             if (compensations != null)
             {

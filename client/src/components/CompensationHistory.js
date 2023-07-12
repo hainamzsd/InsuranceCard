@@ -33,7 +33,7 @@ const CompensationHistory = () => {
   }, []);
 
   if(contract !==null){
-fetch(`https://localhost:7184/api/Compensation/GetCompensationListByContract/${contract.$id}`)
+fetch(`https://localhost:7184/api/Compensation/GetCompensationListByAccount/${sessionStorage.getItem("accountId")}`)
         .then(response => response.json())
         .then(data => {
           // Check if the response is successful

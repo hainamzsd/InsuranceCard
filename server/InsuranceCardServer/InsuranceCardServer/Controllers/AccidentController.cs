@@ -81,10 +81,10 @@ namespace InsuranceCardServer.Controllers
             }
         }
 
-        [HttpGet("GetAccidentListByContract/{id}")]
-        public ActionResult<IEnumerable<Accident>> GetAccidentByContractId(int id)
+        [HttpGet("GetAccidentListByAccountId/{id}")]
+        public ActionResult<IEnumerable<Accident>> GetAccidentByAccountId(int id)
         {
-            var accidents = _context.Accidents.Where(x => x.ContractId == id).ToList();
+            var accidents = _context.Accidents.Where(x => x.Contract.AccountId == id).ToList();
 
             if (accidents != null)
             {

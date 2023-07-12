@@ -37,10 +37,10 @@ namespace InsuranceCardServer.Controllers
             return NotFound();
         }
 
-        [HttpGet("GetPaymentListByContract/{id}")]
-        public ActionResult<IEnumerable<Payment>> GetPaymentByContractId(int id)
+        [HttpGet("GetPaymentListByAccountId/{id}")]
+        public ActionResult<IEnumerable<Payment>> GetPaymentByAccountId(int id)
         {
-            var payments = _context.Payments.Where(x => x.ContractId == id).ToList();
+            var payments = _context.Payments.Where(p => p.Contract.AccountId == id).ToList();
 
             if (payments != null)
             {

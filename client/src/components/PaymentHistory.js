@@ -15,6 +15,7 @@ const PaymentHistory = (props) => {
         // Check if the response is successful
         if (data) {
           setContract(data);
+          console.log(data);
         } else {
           // Handle error cases
           console.error('Failed to fetch userinfo');
@@ -25,13 +26,12 @@ const PaymentHistory = (props) => {
       });
   }, []);
   if(contract !==null){
-      fetch(`https://localhost:7184/api/Payment/GetPaymentListByContract/${contract.$id}`)
+      fetch(`https://localhost:7184/api/Payment/GetPaymentListByAccountId/${sessionStorage.getItem("accountId")}`)
         .then(response => response.json())
         .then(data => {
           // Check if the response is successful
           if (data) {
             setPayments(data);
-          console.log(data);
           } else {
             // Handle error cases
             console.error('Failed to fetch userinfo');

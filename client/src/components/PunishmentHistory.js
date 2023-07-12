@@ -32,7 +32,7 @@ const PunishmentHistory = () => {
   }, []);
 
   if(contract !==null){
-fetch(`https://localhost:7184/api/Punishment/GetPunishmentListByContract/${contract.$id}`)
+fetch(`https://localhost:7184/api/Punishment/GetPunishmentListByAccount/${sessionStorage.getItem("accountId")}`)
         .then(response => response.json())
         .then(data => {
           // Check if the response is successful

@@ -78,10 +78,10 @@ namespace InsuranceCardServer.Controllers
         }
 
 
-        [HttpGet("GetPunishmentListByContract/{id}")]
-        public ActionResult<IEnumerable<Punishment>> GetPunishmentByContractId(int id)
+        [HttpGet("GetPunishmentListByAccount/{id}")]
+        public ActionResult<IEnumerable<Punishment>> GetPunishmentByAccountId(int id)
         {
-            var punishments = _context.Punishments.Where(x => x.ContractId == id).ToList();
+            var punishments = _context.Punishments.Where(x => x.Contract.AccountId == id).ToList();
 
             if (punishments != null)
             {
