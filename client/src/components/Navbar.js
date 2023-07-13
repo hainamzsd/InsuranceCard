@@ -9,6 +9,7 @@ import PersonalInfo from '../pages/PersonalInfo';
 import ReactDOM from "react-dom/client";
 import { Button, Modal, Form,Nav, Tab } from 'react-bootstrap';
 import { BrowserRouter as Router, Route, Routes, Link } from 'react-router-dom';
+import { redirect } from "react-router-dom";
 const Navbar = () => {
 
 
@@ -26,6 +27,8 @@ const Navbar = () => {
   const handleShowModal = () => setShowModal(true);
   const handleLogout = () => {
     sessionStorage.clear();
+    return redirect("/");
+    
   }
   const handleCloseModal = () => setShowModal(false);
   const handleUsernameChange = (e) => setUsername(e.target.value);
@@ -107,6 +110,8 @@ const Navbar = () => {
     if(sessionStorage.getItem("user") !== null && userData?.role !== "customer"){
       return (
         <>
+        <Link to="/" className="nav-item nav-link">Home</Link>
+        <Link to="/ContractPage" className="nav-item nav-link">Contract Page</Link>
         <Link to="/AccountEditPage" className="nav-item nav-link">Account Edit</Link>
   
         <Link to="/EmployeePage" className="nav-item nav-link">Employee Page</Link>

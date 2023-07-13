@@ -8,9 +8,9 @@ namespace InsuranceCardServer.Models
     {
         public int PaymentId { get; set; }
         public int ContractId { get; set; }
-        public DateTime PaymentDate { get; set; }
-        public decimal Amount { get; set; }
-        public string PaymentMethod { get; set; } = null!;
+        public DateTime? PaymentDate { get; set; }
+        public decimal? Amount { get; set; }
+        public string? PaymentMethod { get; set; }
         [JsonIgnore]
         public virtual Contract? Contract { get; set; } = null!;
     }

@@ -21,7 +21,37 @@ namespace InsuranceCardServer.Controllers
         
         }
 
-     
+        [HttpPut("RenewContract/{contractId}")]
+        public IActionResult RenewContract(int contractId)
+        {
+            try
+            {
+                var contract = _context.Contracts.FirstOrDefault(c => c.ContractId == contractId);
+
+                if (contract == null)
+                {
+                    return NotFound("Contract not found");
+                }
+                Payment payment = new Payment()
+                {
+                    ContractId = contract.ContractId,
+                    Amount = 0,
+                    PaymentDate = DateTime.Now,
+                    PaymentMethod = ""
+                    
+                };
+                contract.Active = false;
+                contract.StartDate = DateTime.Now;
+                _context.Payments.Add(payment);
+                _context.SaveChanges();
+
+                return Ok("Contract renewed successfully");
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(500, $"Error: {ex.Message}");
+            }
+        }
 
         [HttpGet]
         public ActionResult<IEnumerable<Contract>> GetAllContracts()
@@ -82,7 +112,28 @@ namespace InsuranceCardServer.Controllers
             }
         }
 
+        [HttpPut("ActivateContract/{contractId}")]
+        public IActionResult ActivateContract(int contractId)
+        {
+            try
+            {
+                var contract = _context.Contracts.FirstOrDefault(c => c.ContractId == contractId);
 
+                if (contract == null)
+                {
+                    return NotFound("Contract not found");
+                }
+
+                contract.Active = true;
+                _context.SaveChanges();
+
+                return Ok("Contract activated successfully");
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(500, $"Error: {ex.Message}");
+            }
+        }
 
         [HttpPost]
         public IActionResult CreateContract(Contract contract)
@@ -96,6 +147,8 @@ namespace InsuranceCardServer.Controllers
                     StartDate = contract.StartDate,
                     EndDate = contract.EndDate,
                     Active = contract.Active,
+
+                    Payments = contract.Payments,
 
                 };
                 _context.Contracts.Add(newContract);

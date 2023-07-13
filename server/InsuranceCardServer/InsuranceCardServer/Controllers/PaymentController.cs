@@ -2,6 +2,7 @@
 using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
+using System.Diagnostics.Contracts;
 using System.Linq;
 
 namespace InsuranceCardServer.Controllers
@@ -35,6 +36,35 @@ namespace InsuranceCardServer.Controllers
             }
 
             return NotFound();
+        }
+
+
+      
+
+        [HttpPut("UpdatePayment/{paymentId}")]
+        public IActionResult UpdatePayment(int paymentId)
+        {
+            try
+            {
+                var payment = _context.Payments.FirstOrDefault(p => p.PaymentId == paymentId);
+                var contract = _context.Contracts.FirstOrDefault(c => c.ContractId == payment.ContractId) ?? throw new Exception("Error");
+
+                if (payment == null)
+                {
+                    return NotFound("Payment not found");
+                }
+                contract.Active = true;
+                payment.Amount = 100;
+                payment.PaymentDate = DateTime.Now;
+                payment.PaymentMethod = "Credit Card";
+                _context.SaveChanges();
+
+                return Ok("Payment updated successfully");
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(500, $"Error: {ex.Message}");
+            }
         }
 
         [HttpGet("GetPaymentListByAccountId/{id}")]

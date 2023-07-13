@@ -27,7 +27,12 @@ const RequestContract = () => {
                 accidents: [],
                 compensationRequests: [],
                 compensations: [],
-                payments: [],
+                payments: [
+                    {
+                        "amount": 0,
+                        "paymentMethod": "string"
+                      }
+                ],
                 punishments: []
             };
 
