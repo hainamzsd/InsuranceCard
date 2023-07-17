@@ -55,7 +55,7 @@ const ContractInformation = () => {
 
   const handleCancel = async (contractId) => {
     try {
-      const response = await fetch(`https://localhost:7184/api/Contract/RenewContract/${contractId}`, {
+      const response = await fetch(`https://localhost:7184/api/Contract/${contractId}`, {
         method: 'DELETE',
         headers: {
           'Content-Type': 'application/json',
@@ -64,7 +64,6 @@ const ContractInformation = () => {
   
       if (response.ok) {
         toast.success('Contract canceled successfully');
-        window.location.reload();
       } else {
         toast.error('Failed to cancel contract');
       }

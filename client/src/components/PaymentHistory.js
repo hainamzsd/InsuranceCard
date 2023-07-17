@@ -17,7 +17,6 @@ const PaymentHistory = (props) => {
         // Check if the response is successful
         if (data) {
           setContract(data);
-          console.log(data);
         } else {
           // Handle error cases
           console.error('Failed to fetch userinfo');
@@ -47,7 +46,6 @@ const PaymentHistory = (props) => {
 
 
   const pay = (paymentId) => {
-    console.log(paymentId);
     fetch(`https://localhost:7184/api/Payment/UpdatePayment/${paymentId}`, {
       method: 'PUT',
       headers: {

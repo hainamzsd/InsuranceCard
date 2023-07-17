@@ -30,7 +30,8 @@ const RequestContract = () => {
                 payments: [
                     {
                         "amount": 0,
-                        "paymentMethod": "string"
+                        "paymentMethod": "string",
+                        "paymentDate": currentDate.toISOString()
                       }
                 ],
                 punishments: []
@@ -43,12 +44,13 @@ const RequestContract = () => {
                 },
                 body: JSON.stringify(contractData)
             });
+            console.log(contractData);
 
             if (response.ok) {
                 const data = await response.json();
                 toast.success("Created Contract");
             } else {
-                toast.error("Created Fail");
+                toast.error("Created Error");
             }
         } catch (error) {
             toast.error("Created Fail");

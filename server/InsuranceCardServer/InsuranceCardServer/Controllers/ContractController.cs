@@ -199,11 +199,12 @@ namespace InsuranceCardServer.Controllers
                 {
                     return NotFound();
                 }
-
+                var pays = _context.Payments.Where(x => x.ContractId == id).ToList();
+                _context.Payments.RemoveRange(pays);
                 _context.Contracts.Remove(contract);
                 _context.SaveChanges();
 
-                return NoContent();
+                return Ok();
             }
             catch (Exception ex)
             {

@@ -7,7 +7,7 @@ namespace InsuranceCardServer.Models
     {
         public int RequestId { get; set; }
         public int ContractId { get; set; }
-        public DateTime RequestDate { get; set; }
+        public DateTime? RequestDate { get; set; }
         public string? Description { get; set; }
         public bool? Resolved { get; set; }
 
