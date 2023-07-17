@@ -114,7 +114,7 @@ const Navbar = () => {
         <Link to="/ContractPage" className="nav-item nav-link">Contract Page</Link>
         <Link to="/AccountEditPage" className="nav-item nav-link">Account Edit</Link>
   
-        <Link to="/EmployeePage" className="nav-item nav-link">Employee Page</Link>
+        <Link to="/Request" className="nav-item nav-link">Request Page</Link>
      
       </>
       )

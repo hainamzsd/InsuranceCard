@@ -36,17 +36,23 @@ namespace InsuranceCardServer.Controllers
         {
             try
             {
-                Compensation exitCom = _context.Compensations.FirstOrDefault(x => x.CompensationId == compensation.CompensationId);
-                if (exitCom != null)
+                Compensation cp = new Compensation() { 
+                    ContractId = 1,
+                    CompensationDate = DateTime.Now,
+                    Amount = compensation.Amount,
+                    Description = compensation.Description,
+                };
+                CompensationRequest request = new CompensationRequest()
                 {
-                    _context.Compensations.Add(compensation);
+                    ContractId = 1,
+                    RequestDate = compensation.CompensationDate,
+                    Description = compensation.Description,
+                    Resolved = false
+                };
+                _context.CompensationRequests.Add(request);
+                _context.Compensations.Add(cp);
                     _context.SaveChanges();
-                    return CreatedAtAction(nameof(GetCompensationByCompensationId), new { id = compensation.CompensationId }, compensation);
-                }
-                else
-                {
-                    return Conflict("An account with the same id already exists.");
-                }
+                    return Ok(cp);
             }
             catch (Exception ex)
             {

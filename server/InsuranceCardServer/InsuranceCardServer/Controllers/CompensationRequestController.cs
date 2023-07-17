@@ -94,6 +94,30 @@ namespace InsuranceCardServer.Controllers
             }
         }
 
+        [HttpPut("/Resolve/{id}")]
+        public IActionResult ResolveRequest(int id)
+        {
+            try
+            {
+                var request = _context.CompensationRequests.FirstOrDefault(x => x.RequestId == id);
+
+                if (request == null)
+                {
+                    return NotFound();
+                }
+
+                request.Resolved = true;
+                _context.CompensationRequests.Update(request);
+                 _context.SaveChanges();
+                return Ok();
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(500, $"Error: {ex.Message}");
+            }
+        }
+
+
         [HttpDelete("{id}")]
         public IActionResult DeleteCompensationRequest(int id)
         {

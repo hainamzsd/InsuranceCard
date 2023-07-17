@@ -13,6 +13,7 @@ import RequestContract from './pages/RequestContract';
 import EmployeePage from './components/EmployeePage';
 import CustomerPage from './components/CustomerPage';
 import ContractPage from './components/ContractPage';
+import CompensationAdmin from './components/CompensationAdmin';
 import AccountEditPage from './components/AccountEditPage';
 
 const router = createBrowserRouter([
@@ -30,8 +31,8 @@ const router = createBrowserRouter([
     element: <RequestContract />
   },
    {
-    path: "/EmployeePage",
-    element: <EmployeePage />
+    path: "/Request",
+    element: <CompensationAdmin />
   },
   {
     path: "/CustomerPage",
